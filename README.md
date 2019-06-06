@@ -18,7 +18,8 @@
         * 尝试构建同构应用 `enterprise-isomorphism`
         * 同构第三方框架 `beidou`
         * 暂时放弃同构，成本有点高。
-    + react预渲染框架学习
+    + react-prerender预渲染框架学习
+        * https://www.jianshu.com/p/5c63c07b51b6
     + react-ssr
 - 分析原始企业网站
     + 要件，式样确定
