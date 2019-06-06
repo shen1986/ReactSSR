@@ -20,7 +20,7 @@
         * 暂时放弃同构，成本有点高。
     + react-prerender预渲染框架学习
         * https://www.jianshu.com/p/5c63c07b51b6
-    + react-ssr
+    + react-ssr 服务端渲染框架
 - 分析原始企业网站
     + 要件，式样确定
     + 了解清楚里面有哪些要实现的功能。
