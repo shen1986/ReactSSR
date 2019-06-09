@@ -30,6 +30,12 @@
             2. 服务端渲染的基本配置 （seo不友好，首次请求时间长，体验不好的解决方案） react-dom/server
                 - client/server-entry.js
                 - build/webpack.config.server.js
+            3. 前端开发环境配置
+                - 
+            4. 服务端开发环境配置
+                - 
+            5. eslint 和 ethorConfig 配置
+                - "semi":[0]  // 忽略`;`检测
 
 
                 
