@@ -29,7 +29,7 @@ React 服务端渲染
                     + 构建前端框架的webpack配置，读取那个模板文件，指定入口，出口等。
                 
                 - .babelrc
-                    + 现在写babel的配置一定要去看他们的管网。
+                    + 现在写babel的配置一定要去看他们的官网。
                     + 指定支持es语法，现在用[@babel/preset-env](https://babeljs.io/docs/en/env)
                     + 指定支持jsx语法，[@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react#docsNav)
 
