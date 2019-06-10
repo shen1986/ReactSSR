@@ -47,7 +47,8 @@ React 服务端渲染
                 - build/webpack.config.server.js
                     + 配置服务端渲染的webpack,这样将client里面的入口文件打包成为服务端可用的js代码，再通过express来运行这个文件。
                     + target: 'node' 指明是node环境，这样node的基本组件不会被打包。
-                    + libraryTarget: 'commonjs2' 这个必须制定，说明commonjs2的模块规则。
+                    + libraryTarget: 'commonjs2' 这个必须制定，说明是commonjs2的模块规则。
+                    node都是用的这种规则（生成的文件会这样：module.exports = {}， require('./a.js'))
                     + 入口文件指定为 `server-entry.js`
                 - server.js
                     + 开启一个express的服务
@@ -69,9 +70,11 @@ React 服务端渲染
                             });
                         }
                         ```
+
             4. 服务端开发环境配置
                 - 利用 nodemon server.js 来运行一个服务。
                 - `util/dev-static.js` 
+
             5. eslint 和 ethorConfig 配置
                 - editorconfig 为了避免windows环境，linux环境，mac环境差异
                 把所有的文字编码统一化，统一`utf-8`格式，换行缩进`4`个空格，换行都用`lf`等等。
