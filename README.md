@@ -95,10 +95,10 @@ React 服务端渲染
                 - 全项目规则 `stardand` 标准规则
                     + "indent": [0] 我喜欢缩进4个空格，所以我把它缩进2个空格的规则忽略掉了。
                     + "semi": "off" 我喜欢在结尾加上`;`,所以我把它结尾不能加`；`的规则忽略掉了。
-                - client规则 比较严格规则 `airbnb`, env 是执行环境。
+                - client规则 比较严格规则 `airbnb`, airbnb 是一个比较有名的写node 的公司。env 是执行环境。
                     + "semi":[0]  // 忽略`;`检测 我不喜欢忽略`;`，如果你不喜欢写`;`，可以加上这个配置
                     + "react/jsx-indent": [0] 我喜欢缩进4个空格，所以我把它缩进2个空格的规则忽略掉了。
-                    + "react/jsx-filename-extension": [0] import必须加jsx后缀， 我里面有些使用js写的，直接忽略了。
+                    + "react/jsx-filename-extension": [0] 不能在js里面有jsx语法， 我里面有些使用js写的，直接忽略了。
 
 - 分析原始企业网站
     + 要件，式样确定

@@ -9,7 +9,9 @@
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "dev:server": "cross-env NODE_ENV=development node server/server.js",
     "clear": "rimraf dist",
-    "build": "npm run clear && npm run build:client && npm run build:server"
+    "build": "npm run clear && npm run build:client && npm run build:server",
+    "lint": "eslint --ext .js --ext .jsx client/",
+    "precommit": "npm run lint"
   },
   "keywords": [],
   "author": "",
