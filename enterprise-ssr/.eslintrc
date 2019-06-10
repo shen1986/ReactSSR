@@ -1,8 +1,7 @@
 {
     "extends": "standard",
     "rules": {
-        "indent": 0,
-        "eol-last": "off",
+        "indent": [0],
         "semi": "off"
     }
 }
