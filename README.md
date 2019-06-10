@@ -91,7 +91,12 @@ React 服务端渲染
                 - 给git Commit也加上eslint规则检查
                     + `npm i husky -D` 安装哈士奇
                     +  `"lint": "eslint --ext .js --ext .jsx client/"` package.json里面添加eslint检查
-                    +  `"precommit": "npm run lint"` 执行commit的时候，会先执行这里的命令。
+                    +  `"precommit": "npm run lint"` 执行commit的时候，哈士奇会先执行这里的命令。
+
+            6. 优化
+                - 提取 webpack 的共通部分。通过 `webpack-merge` 来处理。
+                - 安装 `npm i serve-favicon -S` 用来配置 favicon
+                - 安装 `npm i nodemon -D` 用来配置服务端渲染开发环境
 
 - 分析原始企业网站
     + 要件，式样确定
