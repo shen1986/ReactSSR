@@ -76,20 +76,9 @@ React 服务端渲染
                 - `util/dev-static.js` 
 
             5. eslint 和 ethorConfig 配置
-                - editorconfig 为了避免windows环境，linux环境，mac环境差异
+                - .editorconfig: 为了避免windows环境，linux环境，mac环境差异
                 把所有的文字编码统一化，统一`utf-8`格式，换行缩进`4`个空格，换行都用`lf`等等。
                 打开编辑器按保存的时候会自动格式化文件。
-                ```shell
-                root = true
-
-                [*]
-                charset = utf-8
-                indent_style = space
-                indent_size = 4
-                end_of_line = lf
-                insert_final_newline = true
-                trim_trailing_whitespace = true
-                ```
                 - 这里主要是用来规范代码风格的配置。基本eslint去官网查找规则。
                 - 需要安装的插件 `npm i babel-eslint eslint-config-airbnb eslint-config-standard eslint-loader eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-node eslint-plugin-promise eslint-plugin-react eslint-plugin-standard -D`
                 - 全项目规则 `stardand` 标准规则
@@ -99,6 +88,10 @@ React 服务端渲染
                     + "semi":[0]  // 忽略`;`检测 我不喜欢忽略`;`，如果你不喜欢写`;`，可以加上这个配置
                     + "react/jsx-indent": [0] 我喜欢缩进4个空格，所以我把它缩进2个空格的规则忽略掉了。
                     + "react/jsx-filename-extension": [0] 不能在js里面有jsx语法， 我里面有些使用js写的，直接忽略了。
+                - 给git Commit也加上eslint规则检查
+                    + `npm i husky -D` 安装哈士奇
+                    +  `"lint": "eslint --ext .js --ext .jsx client/"` package.json里面添加eslint检查
+                    +  `"precommit": "npm run lint"` 执行commit的时候，会先执行这里的命令。
 
 - 分析原始企业网站
     + 要件，式样确定
