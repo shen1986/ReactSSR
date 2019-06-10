@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     target: 'node',
-    entry:{
+    entry: {
         app: path.join(__dirname, '../client/server-entry.js')
     },
     output: {
@@ -31,7 +31,7 @@ module.exports = {
                 exclude: [
                     path.join(__dirname, '../node_modules')
                 ]
-            },
+            }
         ]
     }
 }

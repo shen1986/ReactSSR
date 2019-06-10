@@ -19,7 +19,7 @@ const getTemplate = () => {
 
 const Module = module.constructor;
 
-const mfs= new MemoryFs();
+const mfs = new MemoryFs();
 const serverCompiler = webpack(serverConfig);
 serverCompiler.outputFileSystem = mfs;
 let serverBundle;
@@ -40,13 +40,12 @@ serverCompiler.watch({}, (err, stats) => {
     serverBundle = m.exports.default;
 });
 
-module.exports = function(app) {
-
+module.exports = (app) => {
     app.use('/public', proxy({
         target: 'http://localhost:8888'
     }))
 
-    app.get('*', function(req, res) {
+    app.get('*', (req, res) => {
         getTemplate().then(template => {
             const content = ReactDomServer.renderToString(serverBundle);
             res.send(template.replace('<!-- app -->', content));

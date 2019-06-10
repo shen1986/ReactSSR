@@ -75,9 +75,9 @@ React 服务端渲染
             5. eslint 和 ethorConfig 配置
                 - 这里主要是用来规范代码风格的配置。基本eslint去官网查找规则。
                 - `npm i babel-eslint eslint-config-airbnb eslint-config-standard eslint-loader eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-node eslint-plugin-promise eslint-plugin-react eslint-plugin-standard -D`
-                - 全项目规则`stardand` 标准规则
+                - 全项目规则 `stardand` 标准规则
                 - client规则 比较严格规则 `airbnb`, env 是执行环境。
-                - "semi":[0]  // 忽略`;`检测
+                    + "semi":[0]  // 忽略`;`检测
 
 - 分析原始企业网站
     + 要件，式样确定

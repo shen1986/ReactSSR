@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
-    entry:{
+    entry: {
         app: path.join(__dirname, '../client/app.js')
     },
     output: {
@@ -33,7 +33,7 @@ const config = {
                 exclude: [
                     path.join(__dirname, '../node_modules')
                 ]
-            },
+            }
         ]
     },
     plugins: [

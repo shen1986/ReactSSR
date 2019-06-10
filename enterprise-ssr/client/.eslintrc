@@ -11,6 +11,9 @@
     },
     "extends": "airbnb",
     "rules": {
-        "semi":[0]
+        "semi":[0],
+        "indent":"off",
+        "react/jsx-indent": [0],
+        "react/jsx-filename-extension": [0]
     }
 }
