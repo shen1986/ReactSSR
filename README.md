@@ -20,7 +20,7 @@ React 服务端渲染
         * 暂时放弃第三方同构，学习成本有点高。
     + react-prerender预渲染框架学习
         * https://www.jianshu.com/p/5c63c07b51b6
-    + react-ssr 服务端渲染框架 优先
+    + react-ssr 服务端渲染框架 **优先**
         * [原理](http://www.php.cn/js-tutorial-411822.html)
         * 安装 vscode 插件：EditorConfig for VS Code
         * 框架整理以及说明。
