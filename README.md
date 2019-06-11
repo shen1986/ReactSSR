@@ -25,6 +25,7 @@ React 服务端渲染
         * [React + Express – SSR Setup with TypeScript](https://github.com/manuelbieh/react-ssr-setup)
             1. 用 typeScript 写的 ssr 框架，直接使用没有学习的效果，只做参照。
         * 安装 vscode 插件：EditorConfig for VS Code
+            1. 这个统一文件格式的东西太好用了，以后所有项目都会使用。
         * 框架整理以及说明。
             1. 客户端的基本配置
                 - build/webpack.config.client.js
