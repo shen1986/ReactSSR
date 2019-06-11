@@ -110,7 +110,16 @@ React 服务端渲染
                 - 更高级的组件打包到 npmjs.com 网站里面（一般是不指定某个项目，每个项目都能使用的组件，选择放在npm更好，自己上传，然后npm install就好了。）
             
             8. 路由配置
-                - 
+                - 使用 react-router-dom 来配置路由
+
+            9. store 配置
+                - 传统 react-redux 的做法 每次都会生成一个新的 state 规则比较死，而且占用内存。我这里使用 Mobx
+                - Mobx 的规则比较松散，所以写的时候一定要注意
+
+                - 配置装饰器
+                - `npm i @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties -D`
+                - `npm i mobx mobx-react -S`
+                - `npm i prop-types -S`
 
 - 分析原始企业网站
     + 要件，式样确定
