@@ -97,6 +97,16 @@ React 服务端渲染
                 - 提取 webpack 的共通部分。通过 `webpack-merge` 来处理。
                 - 安装 `npm i serve-favicon -S` 用来配置 favicon
                 - 安装 `npm i nodemon -D` 用来配置服务端渲染开发环境
+            
+            7. 目录结构
+                - views 功能页面
+                - config 配置目录
+                - store 存储组件
+                - components 非业务组件
+                - 更高级的组件打包到 npmjs 网站里面
+            
+            8. 路由配置
+                - 
 
 - 分析原始企业网站
     + 要件，式样确定
