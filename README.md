@@ -22,6 +22,8 @@ React 服务端渲染
         * https://www.jianshu.com/p/5c63c07b51b6
     + react-ssr 服务端渲染框架 **优先**
         * [原理](http://www.php.cn/js-tutorial-411822.html)
+        * [React + Express – SSR Setup with TypeScript](https://github.com/manuelbieh/react-ssr-setup)
+            1. 用 typeScript 写的 ssr 框架，直接使用没有学习的效果，只做参照。
         * 安装 vscode 插件：EditorConfig for VS Code
         * 框架整理以及说明。
             1. 客户端的基本配置
