@@ -107,7 +107,7 @@ React 服务端渲染
                 - config 配置目录
                 - store 存储组件
                 - components 非业务组件
-                - 更高级的组件打包到 npmjs 网站里面
+                - 更高级的组件打包到 npmjs.com 网站里面（一般是不指定某个项目，每个项目都能使用的组件，选择放在npm更好，自己上传，然后npm install就好了。）
             
             8. 路由配置
                 - 
