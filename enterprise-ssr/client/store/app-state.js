@@ -5,7 +5,7 @@ import {
     action,
 } from 'mobx';
 
-export class AppState {
+export default class AppState {
     @observable count = 0;
 
     @observable name = 'Jackey';
@@ -22,7 +22,3 @@ export class AppState {
         this.name = name;
     }
 }
-
-const appState = new AppState();
-
-export default appState;
