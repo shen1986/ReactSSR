@@ -125,6 +125,7 @@ React 服务端渲染
                 - 使用了props的方法的时候 要引入 porp-types。
                 - `npm i prop-types -S`
             10. 使用[cnode](https://cnodejs.org/api)接口 
+                - 配置 express 的通信功能。
                 - `npm i body-parser express-session query-string -S`
 
 - 分析原始企业网站
