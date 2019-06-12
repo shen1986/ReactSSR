@@ -1,12 +1,12 @@
 import React from 'react';
-import {
-    observer,
-    inject,
-} from 'mobx-react';
-import PropTypes from 'prop-types';
-import { AppState } from '../../store/app-state';
+// import {
+//     observer,
+//     inject,
+// } from 'mobx-react';
+// import PropTypes from 'prop-types';
+// import { AppState } from '../../store/app-state';
 
-@inject('appState') @observer
+// @inject('appState') @observer
 class TopicList extends React.Component {
     constructor() {
         super();
@@ -17,24 +17,26 @@ class TopicList extends React.Component {
         // do something
     }
 
-    changeName(event) {
-        const { appState } = this.props;
-        appState.changeName(event.target.value);
-    }
+    // changeName() {
+    //     const a = 1;
+    //     // const { appState } = this.props;
+    //     // appState.changeName(event.target.value);
+
+    // }
 
     render() {
-        const { appState } = this.props;
+        // const { appState } = this.props;
         return (
             <div>
                 <input type="text" onChange={this.changeName} />
-                <span>{ appState.msg }</span>
+                {/* <span>{ appState.msg }</span> */}
             </div>
         );
     }
 }
 
-TopicList.propTypes = {
-    appState: PropTypes.instanceOf(AppState),
-};
+// TopicList.propTypes = {
+//     appState: PropTypes.instanceOf(AppState),
+// };
 
 export default TopicList;
