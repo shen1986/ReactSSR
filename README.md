@@ -131,6 +131,9 @@ React 服务端渲染
             12. 服务端渲染优化
                 - 配置服务端路由
                 - store数据同步
+                - `npm i react-async-bootstrapper -S`
+                - `npm i ejs-compiled-loader ejs -S`
+                - `npm i serialize-javascript -S`
             
 
 - 分析原始企业网站
