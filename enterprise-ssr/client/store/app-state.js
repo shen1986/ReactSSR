@@ -27,6 +27,8 @@ export default class AppState {
         this.name = name;
     }
 
+
+    // 此方法用于ssr服务端渲染时调用，获取当前服务端渲染时的store状态，注入到客户端，使得服务端和客户端的store可以同步
     toJson() {
         return {
             count: this.count,

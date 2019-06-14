@@ -11,17 +11,18 @@ class TopicList extends React.Component {
     constructor() {
         super();
         this.changeName = this.changeName.bind(this);
+        this.bootstrap = this.bootstrap.bind(this);
     }
 
     componentDidMount() {
         // do something
     }
 
-    asyncBootstrap() {
-        const that = this;
+    bootstrap() {
         return new Promise((resolve) => {
             setTimeout(() => {
-                that.props.appState.count = 3; // eslint-disable-line
+                const { appState } = this.props;
+                appState.count = 3;
                 resolve(true);
             });
         });

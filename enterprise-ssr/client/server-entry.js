@@ -9,12 +9,14 @@ import { createStoreMap } from './store/store';
 useStaticRendering(true);
 
 // {appStore: xxx}
-export default (stores, routerContext, url) => (
-    <Provider {...stores}>
-        <StaticRouter context={routerContext} location={url}>
-            <App />
-        </StaticRouter>
-    </Provider>
-);
+export default (stores, routerContext, url) => {
+    return (
+        <Provider {...stores}>
+            <StaticRouter context={routerContext} location={url}>
+                <App />
+            </StaticRouter>
+        </Provider>
+    );
+};
 
 export { createStoreMap };

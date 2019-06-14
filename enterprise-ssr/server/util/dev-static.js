@@ -5,7 +5,7 @@ const MemoryFs = require('memory-fs');
 const proxy = require('http-proxy-middleware');
 const serialize = require('serialize-javascript');
 const ejs = require('ejs');
-const asyncBootstrap = require('react-async-bootstrapper').default;
+const asyncBootstrap = require('react-async-bootstrapper');
 const ReactDomServer = require('react-dom/server');
 
 const serverConfig = require('../../build/webpack.config.server');
@@ -47,6 +47,7 @@ serverCompiler.watch({}, (err, stats) => {
 const getStoreState = (stores) => {
     return Object.keys(stores).reduce((result, storeName) => {
         result[storeName] = stores[storeName].toJson();
+        console.log('resultttttttttt', storeName, result[storeName]);
         return result;
     }, {});
 }
@@ -61,8 +62,7 @@ module.exports = (app) => {
             const routerContext = {};
             const stores = createStoreMap();
             const app = serverBundle(stores, routerContext, req.url);
-
-            asyncBootstrap(app).then(() => {
+            asyncBootstrap(app, null, stores).then(() => {
                 if (routerContext.url) {
                     res.status(302).setHeader('Location', routerContext.url);
                     res.end();
@@ -75,6 +75,9 @@ module.exports = (app) => {
                     initialState: serialize(state)
                 });
                 res.send(html);
+            })
+            .catch(err => {
+                console.log('errrrrrrrrrrrrrrrrr', err);
             });
         })
     });

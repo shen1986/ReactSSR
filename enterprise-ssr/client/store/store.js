@@ -8,9 +8,9 @@ export default {
     AppState,
 };
 
+// 此函数专门用于SSR
 export const createStoreMap = () => {
-    const result = {
+    return {
         appState: new AppState(),
     };
-    return result;
 };
