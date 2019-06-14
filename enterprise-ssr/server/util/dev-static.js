@@ -47,7 +47,6 @@ serverCompiler.watch({}, (err, stats) => {
 const getStoreState = (stores) => {
     return Object.keys(stores).reduce((result, storeName) => {
         result[storeName] = stores[storeName].toJson();
-        console.log('resultttttttttt', storeName, result[storeName]);
         return result;
     }, {});
 }
@@ -62,7 +61,7 @@ module.exports = (app) => {
             const routerContext = {};
             const stores = createStoreMap();
             const app = serverBundle(stores, routerContext, req.url);
-            asyncBootstrap(app, null, stores).then(() => {
+            asyncBootstrap(app, undefined, stores).then(() => {
                 if (routerContext.url) {
                     res.status(302).setHeader('Location', routerContext.url);
                     res.end();
@@ -77,7 +76,7 @@ module.exports = (app) => {
                 res.send(html);
             })
             .catch(err => {
-                console.log('errrrrrrrrrrrrrrrrr', err);
+                console.log('err', err);
             });
         })
     });
