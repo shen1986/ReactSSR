@@ -134,7 +134,14 @@ React 服务端渲染
                 - `npm i react-async-bootstrapper -S`
                 - `npm i ejs-compiled-loader ejs -S`
                 - `npm i serialize-javascript -S`
-            
+            13. SEO相关优化
+                - title,seo友好标签
+                - `npm i react-helmet -S` 标签服务端渲染
+                - [踩到一个大大的坑](https://github.com/ReactTraining/react-router/issues/6751)
+                - [真坑爹](https://github.com/ReactTraining/react-router/issues/6704)
+                - [继续坑啊](https://github.com/ReactTraining/react-router/issues/6629)
+                - 只能知道是router-dom可能对异步渲染有点要求，参照 typeScript 写的 ssr 框架 里面用的 connected-react-router，现在占时没解决。
+                
 
 - 分析原始企业网站
     + 要件，式样确定

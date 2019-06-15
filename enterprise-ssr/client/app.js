@@ -11,7 +11,7 @@ const initialState = window.__INITIAL_STATE__ || {}; // eslint-disable-line
 
 const root = document.getElementById('root');
 const render = (Component) => {
-    const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+    const renderMethod = ReactDOM.hydrate;
     renderMethod(
         <AppContainer>
             <Provider appState={new AppState(initialState.appState)}>
