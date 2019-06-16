@@ -141,7 +141,14 @@ React 服务端渲染
                 - [真坑爹](https://github.com/ReactTraining/react-router/issues/6704)
                 - [继续坑啊](https://github.com/ReactTraining/react-router/issues/6629)
                 - 只能知道是router-dom可能对异步渲染有点要求，参照 typeScript 写的 ssr 框架 里面用的 connected-react-router，现在占时没解决。
-                
+                    + 埋了一些暗黑的代码。暂时解决。
+            14. Material-UI 组件导入
+                - [Material-UI](https://material-ui.com/) 号称是React最著名的组件库。
+                    + IE兼容性不高，只兼容ie11以后的浏览器。
+                - [MaterialUI的服务端渲染说明](https://material-ui.com/guides/server-rendering/)
+                - `npm install @material-ui/icons @material-ui/core -S`
+                - `npm i react-jss jss jss-preset-default -S`
+        + react-koa-ssr 服务端渲染框架升级 **优先**
 
 - 分析原始企业网站
     + 要件，式样确定
