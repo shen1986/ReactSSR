@@ -7,7 +7,7 @@ import { deepPurple } from '@material-ui/core/colors';
 import HotApp from './src/containers/HotApp';
 import { AppState, TopicStore, UserStore } from './src/store';
 
-const initialState = window.__INITIAL_STATE__ || {};
+const initialState = window.__INITIAL_STATE__ || {}; // eslint-disable-line
 
 const appState = new AppState(initialState.appState);
 const topicStore = new TopicStore(initialState.topicStore);

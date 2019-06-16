@@ -148,7 +148,9 @@ React 服务端渲染
                 - [MaterialUI的服务端渲染说明](https://material-ui.com/guides/server-rendering/)
                 - `npm install @material-ui/icons @material-ui/core -S`
                 - `npm i react-jss jss jss-preset-default -S`
-        + react-koa-ssr 服务端渲染框架升级 **优先**
+        + react-koa-ssr 服务端渲染框架升级 
+            1. 慢慢做请可能的给代码打上注释。
+        + 发现新的框架 [next.js](https://nextjs.org/)
 
 - 分析原始企业网站
     + 要件，式样确定
@@ -162,3 +164,6 @@ React 服务端渲染
 
 ## 备注记忆
 - React16 render 不需要返回一个根组件包裹的对象了，可以返回一个数组。
+
+## 犯的错
+- 习惯性的把webpack安装成了开发模块里了 `npm i webpack -D`，我明明在服务端渲染的时候通过webpack来导入客户端的react程序，这表明这个依赖是在生产的时候也要用到的。这个太失败了。应该用`npm i webpack -S`。
