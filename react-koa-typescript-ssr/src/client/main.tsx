@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
-// import HotApp from './src/containers/HotApp';
+import HotApp from '../shared/containers/HotApp';
 // import { AppState, TopicStore, UserStore } from './src/store';
 
 const initialState = window.__INITIAL_STATE__ || {};
@@ -35,7 +35,7 @@ renderMethod(
     >
         <Router>
             <MuiThemeProvider theme={theme}>
-                {/* <HotApp /> */}
+                <HotApp />
             </MuiThemeProvider>
         </Router>
     </Provider>,

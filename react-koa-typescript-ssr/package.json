@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -39,6 +40,7 @@
     "mini-css-extract-plugin": "^0.7.0",
     "node-notifier": "^5.4.0",
     "postcss-loader": "^3.0.0",
+    "react-hot-loader": "^4.11.1",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
