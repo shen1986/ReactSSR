@@ -166,4 +166,5 @@ React 服务端渲染
 - React16 render 不需要返回一个根组件包裹的对象了，可以返回一个数组。
 
 ## 犯的错
-- 习惯性的把webpack安装成了开发模块里了 `npm i webpack -D`，我明明在服务端渲染的时候通过webpack来导入客户端的react程序，这表明这个依赖是在生产的时候也要用到的。这个太失败了。应该用`npm i webpack -S`。
+1. 习惯性的把webpack安装成了开发模块里了 `npm i webpack -D`，我明明在服务端渲染的时候通过webpack来导入客户端的react程序，这表明这个依赖是在生产的时候也要用到的。这个太失败了。应该用`npm i webpack -S`。
+2. 以为用typescript 就可以把所有`extensions`里面的 `.js` `.jsx` 去掉，但是像react-dom 这一类的第三方依赖，里面充斥着 import .js .jsx 的代码，所以webpack 编译的时候一直报错，这个错误查了2天。实在愚蠢。

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import { deepPurple } from '@material-ui/core/colors';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { deepPurple } from '@material-ui/core/colors';
 // import HotApp from './src/containers/HotApp';
 // import { AppState, TopicStore, UserStore } from './src/store';
 
@@ -28,8 +28,16 @@ const theme = createMuiTheme({
 });
 
 renderMethod(
-    <div>
-        <div>123</div>
-    </div>,
+    <Provider
+        // appState={appState}
+        // topicStore={topicStore}
+        // userStore={userStore}
+    >
+        <Router>
+            <MuiThemeProvider theme={theme}>
+                {/* <HotApp /> */}
+            </MuiThemeProvider>
+        </Router>
+    </Provider>,
     document.getElementById('root'),
 );

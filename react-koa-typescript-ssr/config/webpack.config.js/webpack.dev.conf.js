@@ -6,9 +6,9 @@ const path = require('path');
 const webpack = require('webpack');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const config = require('../config');
+const config = require('..');
 const baseWebpackConfig = require('./webpack.base.conf');
-const utils = require('./utils');
+const utils = require('../../build/utils');
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
@@ -20,9 +20,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[hash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-  },
-  module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
   },
   devtool: config.dev.devtool,
   devServer: {
@@ -57,13 +54,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       templateParameters: {
         production: false,
       },
-      template: path.join(__dirname, '../client/index.html'),
+      template: path.join(__dirname, '../../src/client/index.html'),
       inject: true
     }),
     new HtmlWebpackPlugin({
       filename: 'server.ejs',
       // template: '!!ejs-compiled-loader!' + path.join(__dirname, '../client/server.template.ejs'),
-      template: path.join(__dirname, '../client/server.template.ejs'),
+      template: path.join(__dirname, '../../src/client/server.template.ejs'),
     }),
   ]
 });

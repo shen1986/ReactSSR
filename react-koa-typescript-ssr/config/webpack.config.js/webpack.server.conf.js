@@ -2,16 +2,16 @@
 
 const merge = require('webpack-merge');
 const path = require('path');
-const config = require('../config');
+const config = require('..');
 const baseWebpackConfig = require('./webpack.base.conf');
-const utils = require('./utils');
+const utils = require('../../build/utils');
 
 
 const serverWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   target: 'node',
   entry: {
-    app: path.join(__dirname, '../client/server-entry.js')
+    app: path.join(__dirname, '../../src/client/server-entry.js')
   },
   output: {
     path: config.build.assetsRoot,
@@ -22,7 +22,7 @@ const serverWebpackConfig = merge(baseWebpackConfig, {
   },
   // 去除依赖，不打包到生成的文件中
   // 打包出来的代码是运行在node环境中的，这些类库是可以通过require()方式调用的
-  externals: Object.keys(require('../package.json').dependencies),
+  externals: Object.keys(require('../../package.json').dependencies),
   devtool: config.dev.devtool,
 });
 

@@ -6,9 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // webpack4 升级，用extract-text-webpack-plugin提取文件有问题
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const utils = require('./utils');
+const utils = require('../../build/utils');
 const baseWebpackConfig = require('./webpack.base.conf');
-const config = require('../config');
+const config = require('..');
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -72,7 +72,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       templateParameters: {
         production: true,
       },
-      template: path.join(__dirname, '../client/index.html'),
+      template: path.join(__dirname, '../../src/client/index.html'),
       inject: 'body',
       minify: {
         removeComments: true,
@@ -83,7 +83,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new HtmlWebpackPlugin({
       filename: 'server.ejs',
-      template: path.join(__dirname, '../client/server.template.ejs'),
+      template: path.join(__dirname, '../../src/client/server.template.ejs'),
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin
