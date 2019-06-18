@@ -34,10 +34,4 @@ class TopicList extends Component {
     }
 }
 
-TopicList.propTypes = {
-    appState: propTypes.objectOrObservableObject,
-    topicStore: propTypes.objectOrObservableObject,
-    history: PropTypes.object,
-};
-
 export default TopicList;
