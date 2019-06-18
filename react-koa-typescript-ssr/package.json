@@ -6,14 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "webpack --config config/webpack.config.js/webpack.dev.conf.js",
-    "dev:client": "webpack-dev-server --inline --progress --config config/webpack.config.js/webpack.dev.conf.js"
+    "dev:client": "webpack-dev-server --inline --progress --config config/webpack.config.js/webpack.dev.conf.js",
+    "ssr:client": "webpack --config config/webpack.config.js/webpack.prod.conf.js",
+    "ssr:server": "webpack --config config/webpack.config.js/webpack.server.conf.js",
+    "clear": "rimraf dist/static",
+    "ssr": "npm run clear && npm run ssr:client && npm run ssr:server",
+    "start": "cross-env NODE_ENV=development node scripts/start.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.1.1",
+    "koa": "^2.7.0",
     "mobx": "^5.10.1",
     "mobx-react": "^6.0.3",
+    "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -33,12 +40,15 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "babel-loader": "^8.0.6",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^3.0.0",
     "ejs-compiled-loader": "^1.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-notifier": "^5.4.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "react-hot-loader": "^4.11.1",
     "rimraf": "^2.6.3",
@@ -47,8 +57,10 @@
     "tslint": "^5.17.0",
     "tslint-loader": "^3.5.4",
     "typescript": "^3.5.2",
+    "uglifyjs-webpack-plugin": "^2.1.3",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.1"
   }
 }

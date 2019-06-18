@@ -28,16 +28,6 @@ const theme = createMuiTheme({
 });
 
 renderMethod(
-    <Provider
-        // appState={appState}
-        // topicStore={topicStore}
-        // userStore={userStore}
-    >
-        <Router>
-            <MuiThemeProvider theme={theme}>
-                <HotApp />
-            </MuiThemeProvider>
-        </Router>
-    </Provider>,
+    <HotApp />,
     document.getElementById('root'),
 );

@@ -11,7 +11,7 @@ const serverWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   target: 'node',
   entry: {
-    app: path.join(__dirname, '../../src/client/server-entry.js')
+    app: path.join(__dirname, '../../src/client/server-entry.tsx')
   },
   output: {
     path: config.build.assetsRoot,
