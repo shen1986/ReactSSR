@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Routes from '../router';
 
 class App extends Component {
     constructor(props) {
@@ -9,9 +8,7 @@ class App extends Component {
 
     private render() {
         return (
-            <React.Fragment>
-                <Routes />
-            </React.Fragment>
+            <div>This is app123123</div>
         );
     }
 }

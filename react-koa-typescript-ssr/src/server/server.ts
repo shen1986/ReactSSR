@@ -1,16 +1,31 @@
 import Koa from 'koa';
 import ReactSSR from 'react-dom/server';
-import serverEntry from '../../dist/server-entry';
+import fs from 'fs';
+import path from 'path';
 import Router from 'koa-router';
+import serve from 'koa-static';
+import devStatic from './util/dev-static';
+
+const isDev = process.env.NODE_ENV === 'development';
+
+
 
 const app = new Koa();
 
 const router = new Router();
 
-router.get('*',  async (ctx, next) => {
-  const appString = ReactSSR.renderToString(serverEntry.default);
-  ctx.body = appString;
-});
+
+if (!isDev) {
+  const serverEntry = require('../../dist/server-entry').default;
+  const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'),'utf8');
+  app.use(serve(path.join(__dirname, '../../dist')));
+  router.get('*',  async (ctx, next) => {
+    const appString = ReactSSR.renderToString(serverEntry);
+    ctx.body = template.replace('<!-- app -->', appString);
+  });
+} else {
+  devStatic(router);
+}
 
 app.use(router.routes());
 app.use(router.allowedMethods());

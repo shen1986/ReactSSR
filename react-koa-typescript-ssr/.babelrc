@@ -19,7 +19,8 @@
         ],
         "@babel/proposal-class-properties",
         "@babel/proposal-optional-chaining",
-        "@babel/syntax-dynamic-import"
+        "@babel/syntax-dynamic-import",
+        "react-hot-loader/babel"
     ],
     "env": {
         "test": {
