@@ -9,9 +9,7 @@ class App extends Component {
 
     private render() {
         return (
-            <React.Fragment>
-                <Routes />
-            </React.Fragment>
+            <div>123cd</div>
         );
     }
 }
