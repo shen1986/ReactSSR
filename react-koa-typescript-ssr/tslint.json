@@ -24,7 +24,7 @@
     "ordered-imports": false,
     "member-ordering": false,
     "no-var-requires": false,
-    "no-console": false,
+    "no-console": false
   },
   "rulesDirectory": ["src"]
 }

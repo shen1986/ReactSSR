@@ -11,13 +11,14 @@
     "ssr:server": "webpack --config config/webpack.config.js/webpack.server.conf.js",
     "clear": "rimraf dist/static",
     "ssr": "npm run clear && npm run ssr:client && npm run ssr:server",
-    "start": "cross-env NODE_ENV=development node scripts/start.js"
+    "start": "cross-env NODE_ENV=development ts-node --project src/server/tsconfig.json src/server/server.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.1.1",
     "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
     "mobx": "^5.10.1",
     "mobx-react": "^6.0.3",
     "nodemon": "^1.19.1",
@@ -37,6 +38,8 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/koa": "^2.0.48",
+    "@types/koa-router": "^7.0.41",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "babel-loader": "^8.0.6",
@@ -54,6 +57,7 @@
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
+    "ts-node": "^8.3.0",
     "tslint": "^5.17.0",
     "tslint-loader": "^3.5.4",
     "typescript": "^3.5.2",

@@ -8,7 +8,7 @@ const app = new Koa();
 const router = new Router();
 
 router.get('*',  async (ctx, next) => {
-  const appString = ReactSSR.renderToString(serverEntry.default);
+  const appString = ReactSSR.renderToString(serverEntry);
   ctx.body = appString;
 });
 

@@ -8,6 +8,7 @@ const utils = require('../../build/utils');
 
 
 const serverWebpackConfig = merge(baseWebpackConfig, {
+  name: 'server',
   mode: 'development',
   target: 'node',
   entry: {
