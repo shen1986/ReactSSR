@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Routes from '../router';
 
 class App extends Component {
     constructor(props) {
@@ -9,9 +8,8 @@ class App extends Component {
 
     private render() {
         return (
-            <div>123cd</div>
+            <div>This is app123123</div>
         );
     }
 }
-
 export default App;

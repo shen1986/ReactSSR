@@ -1,33 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'mobx-react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { deepPurple } from '@material-ui/core/colors';
-import HotApp from '../shared/containers/HotApp';
-// import { AppState, TopicStore, UserStore } from './src/store';
+import ReactDom from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import App from '../shared/containers/App';
 
-const initialState = window.__INITIAL_STATE__ || {};
+const root = document.getElementById('root');
+const render = Component => {
+    ReactDom.hydrate(
+        <AppContainer>
+            <App />
+        </AppContainer>, 
+        root
+    );
+}
 
-// const appState = new AppState(initialState.appState);
-// const topicStore = new TopicStore(initialState.topicStore);
-// const userStore = new UserStore(initialState.userStore);
+render(App);
 
-const renderMethod = !module.hot ? ReactDOM.hydrate : ReactDOM.render;
-
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#ef5350',
-        },
-        secondary: {
-            main: deepPurple[400],
-        },
-        type: 'light',
-    },
-});
-
-renderMethod(
-    <HotApp />,
-    document.getElementById('root'),
-);
+if (module.hot) {
+    module.hot.accept('../shared/containers/App.tsx', () => {
+        const NextApp = require('../shared/containers/App').default;
+        render(NextApp);
+    })
+}
