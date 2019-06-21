@@ -14,7 +14,7 @@ const router = new Router();
 
 if (!isDev) {
   const serverEntry = require('../../dist/server-entry').default;
-  const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'),'utf8');
+  const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
   app.use(serve(path.join(__dirname, '../../dist')));
   router.get('*',  async (ctx, next) => {
     const appString = ReactSSR.renderToString(serverEntry);
