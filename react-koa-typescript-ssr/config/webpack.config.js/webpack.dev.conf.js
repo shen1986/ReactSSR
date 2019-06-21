@@ -13,6 +13,8 @@ const utils = require('../../build/utils');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
+console.log(baseWebpackConfig.module.rules[0]);
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   output: {
@@ -64,6 +66,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
   ]
 });
+
+console.log(devWebpackConfig.module.rules[0]);
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port;

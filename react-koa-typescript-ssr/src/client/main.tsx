@@ -4,20 +4,21 @@ import { AppContainer } from 'react-hot-loader';
 import App from '../shared/containers/App';
 
 const root = document.getElementById('root');
-const render = Component => {
+const render = (Component: any) => {
     ReactDom.hydrate(
         <AppContainer>
-            <App />
-        </AppContainer>, 
-        root
+            <Component />
+        </AppContainer>,
+        root,
     );
-}
+};
 
 render(App);
 
-if (module.hot) {
-    module.hot.accept('../shared/containers/App.tsx', () => {
+const m: any = module;
+if (m.hot) {
+    m.hot.accept('../shared/containers/App.tsx', () => {
         const NextApp = require('../shared/containers/App').default;
         render(NextApp);
-    })
+    });
 }

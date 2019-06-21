@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+class App extends Component<any, any> {
+	constructor(props: any) {
+		super(props);
+		this.state = {};
+	}
 
-    private render() {
-        return (
-            <div>This is app123123</div>
-        );
-    }
+	public render() {
+		return <div>This is app1111</div>;
+	}
 }
 export default App;

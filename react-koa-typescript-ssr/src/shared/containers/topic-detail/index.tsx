@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-class TopicDetail extends Component {
-    constructor(props) {
+class TopicDetail extends Component<any, any> {
+    constructor(props: any) {
         super(props);
         this.state = {};
     }
 
-    private componentDidMount() {
+    public componentDidMount() {
         // do something
     }
 
-    private render() {
+    public render() {
         return (
             <div>
                 123123

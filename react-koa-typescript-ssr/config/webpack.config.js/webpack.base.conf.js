@@ -2,16 +2,12 @@
 const path = require('path');
 const config = require('../index');
 const utils = require('../../build/utils');
-const resolve = (dir) => path.join(__dirname, '../../', dir);
 
 const createLintingRule = () => ({
-    test: /\.(js|jsx)$/,
+    test: /\.(ts|tsx)$/,
     loader: 'tslint-loader',
     enforce: 'pre',
-    include: [resolve('src')],
-    options: {
-        emitWarning: !config.dev.showEslintErrorsInOverlay,
-    },
+    include: [path.join(__dirname, '../../src')],
 });
 
 module.exports = {

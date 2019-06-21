@@ -1,9 +1,9 @@
 import { hot } from 'react-hot-loader'; // eslint-disable-line
-import React, { Component } from 'react';
+import React, { Component } from 'React';
 import App from './App';
 
 // Remove the server-side injected CSS.
-const deleteServerCss = (TheApp) => {
+const deleteServerCss = (theApp: any) => {
     class Main extends Component {
         private componentDidMount() {
             const jssStyles = document.getElementById('jss-server-side');
@@ -13,7 +13,7 @@ const deleteServerCss = (TheApp) => {
         }
 
         private render() {
-            return <TheApp />;
+            return <theApp />;
         }
     }
     return Main;

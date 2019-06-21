@@ -1,4 +1,4 @@
-import Koa from 'koa';
+import Koa from 'Koa';
 import ReactSSR from 'react-dom/server';
 import fs from 'fs';
 import path from 'path';
@@ -13,20 +13,20 @@ const app = new Koa();
 const router = new Router();
 
 if (!isDev) {
-  const serverEntry = require('../../dist/server-entry').default;
-  const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
-  app.use(serve(path.join(__dirname, '../../dist')));
-  router.get('*',  async (ctx, next) => {
-    const appString = ReactSSR.renderToString(serverEntry);
-    ctx.body = template.replace('<!-- app -->', appString);
-  });
+	const serverEntry = require('../../dist/server-entry').default;
+	const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
+	app.use(serve(path.join(__dirname, '../../dist')));
+	router.get('*', async (ctx, next) => {
+		const appString = ReactSSR.renderToString(serverEntry);
+		ctx.body = template.replace('<!-- app -->', appString);
+	});
 } else {
-  devStatic(router);
+	devStatic(app, router);
 }
 
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.listen(3333, () => {
-  console.log('server is listening at port 3333');
+	console.log('server is listening at port 3333');
 });
