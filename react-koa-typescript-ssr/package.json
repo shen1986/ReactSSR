@@ -4,7 +4,6 @@
   "description": "react-typescript-服务端",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "webpack --config config/webpack.config.js/webpack.dev.conf.js",
     "dev:client": "webpack-dev-server --inline --progress --config config/webpack.config.js/webpack.dev.conf.js",
     "dev:server": "nodemon",
@@ -12,7 +11,6 @@
     "ssr:server": "webpack --config config/webpack.config.js/webpack.server.conf.js",
     "clear": "rimraf dist/static",
     "ssr": "npm run clear && npm run ssr:client && npm run ssr:server",
-    "start": "cross-env NODE_ENV=development ts-node --project tsconfig.server.json src/server/server.ts",
     "lint": "tslint \"src/**/*.ts\" --force",
     "lint1": "tslint \"src/**/*.tsx\" --force",
     "precommit": "npm run lint && npm run lint1"

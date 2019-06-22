@@ -13,8 +13,8 @@ class TopicDetail extends Component<any, any> {
     public render() {
         return (
             <div>
-                123123
-      </div>
+                This is TopicDetail
+            </div>
         );
     }
 }

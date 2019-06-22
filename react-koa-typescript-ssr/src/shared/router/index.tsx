@@ -24,9 +24,9 @@ import TopicDetail from '../containers/topic-detail';
 
 export default () => (
   <React.Fragment>
-    <Route path='/' exact render={() => <Redirect to='/list' />} />
-    <Route path='/list' component={TopicList} />
-    <Route path='/detail/:id' component={TopicDetail} />
+    <Route path="/" exact render={() => <Redirect to="/list" />} />
+    <Route path="/list" component={TopicList} />
+    <Route path="/detail/:id" component={TopicDetail} />
     {/* <Route path='/login' component={Login} /> */}
   </React.Fragment>
 );

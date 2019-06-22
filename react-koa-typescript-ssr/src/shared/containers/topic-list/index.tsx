@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 @inject('appState')
 @observer
 class TopicList extends Component<any, any> {
+	static propTypes: { appState: PropTypes.Requireable<object>; };
 	constructor(props: any) {
 		super(props);
+		this.changeName = this.changeName.bind(this);
 	}
 
 	public componentDidMount() {
 		// 获取数据
-		this.props.topicStore.fetchTopics('all');
+		// this.props.topicStore.fetchTopics('all');
 	}
 
 	public bootstrap(): Promise<Boolean> {
@@ -26,9 +28,23 @@ class TopicList extends Component<any, any> {
 			resolve(true);
 		});
 	}
+
+	changeName(event: any) {
+		this.props.appState.changeName(event.target.value);
+	}
+
 	public render() {
-		return <div>123123</div>;
+		return (
+			<div>
+				<input type="text" onChange={this.changeName} />
+				<span>{this.props.appState.msg}</span>
+			</div>
+		);
 	}
 }
+
+TopicList.propTypes = {
+	appState: PropTypes.object,
+};
 
 export default TopicList;
