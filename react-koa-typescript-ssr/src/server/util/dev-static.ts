@@ -40,6 +40,7 @@ const getModuleFromString = (bundle: string, filename: string) => {
 	return m;
 };
 
+console.log(111);
 const mfs = new MemoryFs();
 const serverCompiler = webpack(serverConfig);
 serverCompiler.outputFileSystem = mfs;

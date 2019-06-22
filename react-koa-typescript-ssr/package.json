@@ -14,7 +14,8 @@
     "ssr": "npm run clear && npm run ssr:client && npm run ssr:server",
     "start": "cross-env NODE_ENV=development ts-node --project tsconfig.server.json src/server/server.ts",
     "lint": "tslint \"src/**/*.ts\" --force",
-    "precommit": "npm run lint"
+    "lint1": "tslint \"src/**/*.tsx\" --force",
+    "precommit": "npm run lint && npm run lint1"
   },
   "author": "",
   "license": "ISC",
