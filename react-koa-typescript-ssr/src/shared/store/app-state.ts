@@ -35,8 +35,4 @@ class AppState {
 	}
 }
 
-autorun(() => {
-	console.log('123123');
-});
-
 export default AppState;
