@@ -12,7 +12,7 @@ const utils = require('../../build/utils');
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
-
+console.log(config.dev.proxyTable);
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   output: {

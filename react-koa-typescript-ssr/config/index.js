@@ -8,7 +8,7 @@ module.exports = {
     assetsPublicPath: '/public/',
     assetsSubDirectory: 'static',
     proxyTable: {
-
+      '/api': 'http://localhost:3333'
     },
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and

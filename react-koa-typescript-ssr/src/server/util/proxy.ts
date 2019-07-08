@@ -30,5 +30,6 @@ const proxy = async (ctx: any) => {
 };
 
 router.get('/topics', proxy);
+router.post('/message/mark_all', proxy);
 
 export default router;

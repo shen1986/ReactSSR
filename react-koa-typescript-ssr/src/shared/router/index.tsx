@@ -21,12 +21,14 @@ import { Route, Redirect } from 'react-router-dom';
 // import Login from '../containers/user/login';
 import TopicList from '../containers/topic-list';
 import TopicDetail from '../containers/topic-detail';
+import TestApi from '../containers/test/api-text';
 
 export default () => (
   <React.Fragment>
     <Route path="/" exact render={() => <Redirect to="/list" />} />
     <Route path="/list" component={TopicList} />
     <Route path="/detail/:id" component={TopicDetail} />
+    <Route path="/test" component={TestApi} />
     {/* <Route path='/login' component={Login} /> */}
   </React.Fragment>
 );

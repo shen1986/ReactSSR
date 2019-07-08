@@ -39,17 +39,17 @@ app.use(session(config, app));
 router.use('/api/user', loginRouter.routes());
 router.use('/api/v1', proxy.routes());
 
-if (!isDev) {
-	const serverEntry = require('../../dist/server-entry').default;
-	const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
-	app.use(serve(path.join(__dirname, '../../dist')));
-	router.get('*', async (ctx, next) => {
-		const appString = ReactSSR.renderToString(serverEntry);
-		ctx.body = template.replace('<!-- app -->', appString);
-	});
-} else {
-	devStatic(app, router);
-}
+// if (!isDev) {
+// 	const serverEntry = require('../../dist/server-entry').default;
+// 	const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
+// 	app.use(serve(path.join(__dirname, '../../dist')));
+// 	router.get('*', async (ctx, next) => {
+// 		const appString = ReactSSR.renderToString(serverEntry);
+// 		ctx.body = template.replace('<!-- app -->', appString);
+// 	});
+// } else {
+// 	devStatic(app, router);
+// }
 
 app.use(router.routes());
 app.use(router.allowedMethods());
