@@ -5,10 +5,9 @@ import { CSSTransition } from 'react-transition-group';
 
 const router = new Router();
 
-const proxy = async (ctx) => {
+const proxy = async (ctx: any) => {
     const user = ctx.session.user || {};
     try {
-        console.log(ctx.path);
         const result = await $http(ctx.path, {
             method: ctx.method,
             params: ctx.query,
@@ -16,10 +15,8 @@ const proxy = async (ctx) => {
                 accesstoken: user.accessToken,
             })),
         });
-        console.log(result);
         ctx.data = result.data;
     } catch (err) {
-        console.log(err);
         ctx.status = 500;
         if (err.response) {
             ctx.data = err.response.data;
