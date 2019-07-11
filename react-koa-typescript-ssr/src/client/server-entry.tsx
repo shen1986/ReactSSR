@@ -1,12 +1,13 @@
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import App from '../shared/containers/App';
-import { Provider, useStaticRenderidng } from 'mobx-react';
+import { Provider, useStaticRendering } from 'mobx-react';
 
 // 让mobx在服务端渲染的时候不会重复数据变换
-useStaticRenderidng(true);
+useStaticRendering(true);
 
-export default (stores, routerContent, url, sheetsRegistry, generateClassName, theme) => (
+// {appStore: xxx}
+export default (stores: any, routerContent: any, url: any) => (
     <Provider {...stores} >
         <StaticRouter context={routerContent} location={url}>
             <App />
