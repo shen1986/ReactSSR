@@ -32,6 +32,7 @@
     "nodemon": "^1.19.1",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
+    "react-async-bootstrapper": "^2.1.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "webpack": "^4.34.0"

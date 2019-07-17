@@ -4,6 +4,7 @@ import path from 'path';
 import MemoryFs from 'memory-fs';
 import ReactDomServer from 'react-dom/server';
 import NativeModule from 'module';
+const bootstrapper = require('react-async-bootstrapper');
 const proxy = require('koa-proxies');
 import vm from 'vm';
 
@@ -44,6 +45,7 @@ const mfs = new MemoryFs();
 const serverCompiler = webpack(serverConfig);
 serverCompiler.outputFileSystem = mfs;
 let serverBundle: any;
+let createStoreMap: any;
 serverCompiler.watch({}, (err, stats: any) => {
 	if (err) {
 		throw err;
@@ -57,7 +59,15 @@ serverCompiler.watch({}, (err, stats: any) => {
 	const m = getModuleFromString(bundle, 'server-entry.js');
 	const result: any = m.exports;
 	serverBundle = result.default;
+	createStoreMap = result.createStoreMap;
 });
+
+const getStoreState = (stores: any) => {
+    return Object.keys(stores).reduce((result: any, storeName: any): any => {
+        result[storeName] = stores[storeName].toJson();
+    });
+};
+
 export default (app: any, router: any) => {
 	// 开发环境
 	// webpack启动时获取template，然后返回给前端
@@ -73,7 +83,22 @@ export default (app: any, router: any) => {
 
 	router.get('*', async (ctx: any, next: any) => {
 		const template = await getTemplate();
-		const content = ReactDomServer.renderToString(serverBundle);
-		ctx.body = (template as string).replace('<!-- app -->', content);
+
+        const routerContext: any = {};
+        const stores = createStoreMap();
+        const app = serverBundle(stores, routerContext, ctx.path);
+        // console.log(app);
+        const result  = await bootstrapper(app);
+        console.log(result);
+         await bootstrapper(app).then(() => {
+            console.log(11111111);
+            if (routerContext.url) {
+                return ctx.redirect(routerContext.url);
+            }
+            const state = getStoreState(stores);
+            const content = ReactDomServer.renderToString(app);
+            ctx.body = (template as string).replace('<!-- app -->', content);
+        })
+        .catch((err: any) => next(err));
 	});
 };
