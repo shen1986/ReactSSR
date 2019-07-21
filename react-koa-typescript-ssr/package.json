@@ -20,6 +20,7 @@
   "dependencies": {
     "@material-ui/core": "^4.1.1",
     "axios": "^0.19.0",
+    "ejs": "^2.6.2",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-proxies": "^0.8.1",
@@ -34,7 +35,10 @@
     "react": "^16.8.6",
     "react-async-bootstrapper": "^2.1.1",
     "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "react-jss": "^8.6.1",
     "react-router-dom": "^5.0.1",
+    "serialize-javascript": "^1.7.0",
     "webpack": "^4.34.0"
   },
   "devDependencies": {
@@ -48,6 +52,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/ejs": "^2.6.3",
     "@types/koa": "^2.0.48",
     "@types/koa-router": "^7.0.41",
     "@types/koa-session": "^5.10.0",
@@ -56,7 +61,10 @@
     "@types/memory-fs": "^0.3.2",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.8",
+    "@types/react-jss": "^8.6.3",
     "@types/react-router-dom": "^4.3.4",
+    "@types/serialize-javascript": "^1.5.0",
     "@types/webpack": "^4.4.33",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.0",
