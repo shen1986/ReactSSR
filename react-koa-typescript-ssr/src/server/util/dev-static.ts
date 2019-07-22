@@ -2,22 +2,20 @@ import axios from 'axios';
 import webpack from 'webpack';
 import path from 'path';
 import MemoryFs from 'memory-fs';
-import ReactDomServer from 'react-dom/server';
 import NativeModule from 'module';
-const proxy = require('koa-proxies');
 import vm from 'vm';
+import serverRender from './server-render';
+const proxy = require('koa-proxies');
 
 import serverConfig from '../../../config/webpack.config.js/webpack.server.conf';
 
+// 获取模版文件
 const getTemplate = () => {
-	return new Promise((resolve, reject) => {
-		axios
-			.get('http://localhost:8080/public/app.html')
-			.then((res) => {
-				resolve(res.data);
-			})
-			.catch(reject);
-	});
+    return axios.get('http://0.0.0.0:8080/public/server.ejs')
+    .then((res: {data: any}) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // 将string解析为一个模块
@@ -42,22 +40,43 @@ const getModuleFromString = (bundle: string, filename: string) => {
 
 const mfs = new MemoryFs();
 const serverCompiler = webpack(serverConfig);
+// 自定义文件系统
+// 默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。
+// 但是，还可以使用不同类型的文件系统（内存(memory), webDAV 等）来更改输入或输出行为。
+// 为了实现这一点，可以改变 inputFileSystem 或 outputFileSystem。
+// 例如，可以使用 memory-fs 替换默认的 outputFileSystem，以将文件写入到内存中，而不是写入到磁盘。
 serverCompiler.outputFileSystem = mfs;
+
+// 调用 watch 方法会触发 webpack 执行器，但之后会监听变更（很像 CLI 命令: webpack--watch）
+// 一旦 webpack 检测到文件变更，就会重新执行编译。该方法返回一个 Watching 实例。
 let serverBundle: any;
+// let createStoreMap: any;
 serverCompiler.watch({}, (err, stats: any) => {
 	if (err) {
 		throw err;
 	}
-	const newStats = stats.toJson();
-	newStats.errors.forEach((error: any) => console.log(error));
-	newStats.warnings.forEach((warn: any) => console.warn(warn));
+	const info = stats.toJson();
+	info.errors.forEach((error: any) => console.log(error));
+	info.warnings.forEach((warn: any) => console.warn(warn));
 
-	const bundlePath = path.join(serverConfig.output.path, serverConfig.output.filename);
-	const bundle = mfs.readFileSync(bundlePath, 'utf-8');
+    const bundlePath = path.join(serverConfig.output.path, serverConfig.output.filename);
+    // 从内存中读取server bundle
+    // 读出的bundle是为string类型，并不是js中可以使用的模块
+    const bundle = mfs.readFileSync(bundlePath, 'utf-8');
+    // 使用这种方式打包的模块无法使用require模式
+    // const m = new Module();
+    // m._compile(bundle, 'server-entry.js');
 	const m = getModuleFromString(bundle, 'server-entry.js');
-	const result: any = m.exports;
-	serverBundle = result.default;
+	serverBundle = m.exports;
+	// createStoreMap = result.createStoreMap;
 });
+
+// const getStoreState = (stores: any) => {
+//     return Object.keys(stores).reduce((result: any, storeName: any): any => {
+//         result[storeName] = stores[storeName].toJson();
+//     });
+// };
+
 export default (app: any, router: any) => {
 	// 开发环境
 	// webpack启动时获取template，然后返回给前端
@@ -69,11 +88,16 @@ export default (app: any, router: any) => {
 		proxy('/public', {
 			target: 'http://0.0.0.0:8080',
 		}),
-	);
+    );
 
 	router.get('*', async (ctx: any, next: any) => {
-		const template = await getTemplate();
-		const content = ReactDomServer.renderToString(serverBundle);
-		ctx.body = (template as string).replace('<!-- app -->', content);
+        if (!serverBundle) {
+            ctx.body = 'waiting for compile';
+            return;
+        }
+
+        const template = await getTemplate();
+
+        await serverRender(ctx, next, serverBundle, template);
 	});
 };
