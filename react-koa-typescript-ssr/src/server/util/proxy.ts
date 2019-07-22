@@ -1,7 +1,6 @@
 import Router from 'koa-router';
 import querystring from 'query-string';
 import $http from './request';
-import { CSSTransition } from 'react-transition-group';
 
 const router = new Router();
 

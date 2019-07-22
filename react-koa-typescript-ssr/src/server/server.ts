@@ -1,16 +1,15 @@
 import Koa from 'Koa';
-import ReactSSR from 'react-dom/server';
 import fs from 'fs';
 import path from 'path';
 import Router from 'koa-router';
 import serve from 'koa-static';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-session';
-import devStatic from './util/dev-static';
 import loginRouter from './util//handle-login';
 import proxy from './util/proxy';
 import handleResponse  from './middlewares/handle-response';
 import cors from 'koa2-cors';
+import serverRender from './util/server-render';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -41,13 +40,16 @@ router.use('/api/v1', proxy.routes());
 
 if (!isDev) {
 	const serverEntry = require('../../dist/server-entry').default;
-	const template = fs.readFileSync(path.join(__dirname, '../../dist/app.html'), 'utf8');
-	app.use(serve(path.join(__dirname, '../../dist')));
+	const template = fs.readFileSync(path.join(__dirname, '../../dist/server.ejs'), 'utf8');
+    app.use(serve(path.join(__dirname, '../../dist')));
+
 	router.get('*', async (ctx, next) => {
-		const appString = ReactSSR.renderToString(serverEntry);
-		ctx.body = template.replace('<!-- app -->', appString);
+		// const appString = ReactSSR.renderToString(serverEntry);
+        // ctx.body = template.replace('<!-- app -->', appString);
+        await serverRender(ctx, next, serverEntry, template);
 	});
 } else {
+    const devStatic = require('./util/dev-static').default;
 	devStatic(app, router);
 }
 

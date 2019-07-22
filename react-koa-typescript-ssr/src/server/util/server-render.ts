@@ -42,8 +42,6 @@ export default async(ctx: any, next: any, bundle: any, template: any) => {
         theme,
     );
 
-    console.log(appTemplate);
-
     await bootstrapper(appTemplate)
         .then(() => {
             console.log('1111', appTemplate);
