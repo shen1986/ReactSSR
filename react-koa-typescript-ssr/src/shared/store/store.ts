@@ -1,13 +1,11 @@
-import AppStateClass from './app-state';
+import AppState from './app-state';
 
-export const AppState = AppStateClass;
-
-export default {
+export {
     AppState,
 };
 
-export const createStoreMap = () => {
-    return {
-        appState: new AppState(),
-    };
-};
+export const createStoreMap = () => ({
+    appState: new AppState(),
+    // topicStore: new TopicStore(),
+    // userStore: new UserStore(),
+});

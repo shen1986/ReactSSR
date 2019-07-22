@@ -26,6 +26,10 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+            },
+            {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {

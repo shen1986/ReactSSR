@@ -4,8 +4,7 @@ const MemoryFs = require('memory-fs');
 const path = require('path');
 const proxy = require('koa-proxies');
 const fs = require('fs');
-// const bootstrapper = require('react-async-bootstrapper');
-const serverConfig = require('../../build/webpack.server.conf');
+const serverConfig = require('../../../config/webpack.config.js/webpack.server.conf2');
 const serverRender = require('./server-render');
 
 // 获取模板文件
@@ -76,21 +75,10 @@ serverCompiler.watch({}, (err, stats) => {
   // 从内存中读取server bundle
   // 读出的bundle是为string类型，并不是js中可以使用的模块
   const bundle = mfs.readFileSync(bundlePath, 'utf-8');
-      fs.writeFile(
-          path.join(__dirname, "../../dist/bundle.js"),
-          bundle,
-          err => {
-              console.log(err);
-          }
-      );
   // 使用这种方式打包的模块无法使用require模式
   // const m = new Module();
   // m._compile(bundle, 'server-entry.js');
   const m = getModuleFromString(bundle, 'server-entry.js');
-  for (let [key, value] of Object.entries(m.exports)) {
-      console.log(key, '-------', value);
-      console.log(JSON.stringify(value));
-  }
   // serverBundle = m.exports.default;
   serverBundle = m.exports;
   // createStoreMap = m.exports.createStoreMap;
@@ -115,13 +103,6 @@ module.exports = (app, router) => {
         return;
       }
 
-          fs.writeFile(
-              path.join(__dirname, "../../dist/temp.js"),
-              JSON.stringify(serverBundle),
-              err => {
-                  console.log(err);
-              }
-          );
       await serverRender(ctx, next, serverBundle, res);
     });
   });

@@ -4,7 +4,7 @@ const Helmet = require('react-helmet').default;
 const ejs = require('ejs');
 const serialize = require('serialize-javascript');
 const createMuiTheme = require('@material-ui/core/styles').createMuiTheme;
-const createGenerateClassName = require('@material-ui/core/styles').createGenerateClassName
+const createGenerateClassName = require('@material-ui/styles').createGenerateClassName;
 const lightBlue = require('@material-ui/core/colors').lightBlue;
 const pink = require('@material-ui/core/colors').pink;
 const SheetsRegistry = require('react-jss').SheetsRegistry;
@@ -42,11 +42,6 @@ module.exports = async (ctx, next, bundle, template) => {
     generateClassName,
     theme,
   );
-
-    for (const [key, value] of Object.entries(appTemplate)) {
-        console.log(key, '-------', value);
-        console.log(JSON.stringify(value));
-    }
 
   await bootstrapper(appTemplate)
     .then(() => {

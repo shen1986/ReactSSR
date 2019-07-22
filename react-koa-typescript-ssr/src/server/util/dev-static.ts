@@ -2,6 +2,7 @@ import axios from 'axios';
 import webpack from 'webpack';
 import path from 'path';
 import MemoryFs from 'memory-fs';
+import fs from 'fs';
 import NativeModule from 'module';
 import vm from 'vm';
 import serverRender from './server-render';
@@ -56,8 +57,14 @@ serverCompiler.watch({}, (err, stats: any) => {
 		throw err;
 	}
 	const info = stats.toJson();
-	info.errors.forEach((error: any) => console.log(error));
-	info.warnings.forEach((warn: any) => console.warn(warn));
+    if (stats.hasErrors()) {
+        console.log('错误');
+        console.error(info.errors);
+    }
+    if (stats.hasWarnings()) {
+        console.log('警告');
+        console.warn(info.warnings);
+    }
 
     const bundlePath = path.join(serverConfig.output.path, serverConfig.output.filename);
     // 从内存中读取server bundle
@@ -66,16 +73,10 @@ serverCompiler.watch({}, (err, stats: any) => {
     // 使用这种方式打包的模块无法使用require模式
     // const m = new Module();
     // m._compile(bundle, 'server-entry.js');
-	const m = getModuleFromString(bundle, 'server-entry.js');
+    const m = getModuleFromString(bundle, 'server-entry.js');
 	serverBundle = m.exports;
 	// createStoreMap = result.createStoreMap;
 });
-
-// const getStoreState = (stores: any) => {
-//     return Object.keys(stores).reduce((result: any, storeName: any): any => {
-//         result[storeName] = stores[storeName].toJson();
-//     });
-// };
 
 export default (app: any, router: any) => {
 	// 开发环境
@@ -97,7 +98,6 @@ export default (app: any, router: any) => {
         }
 
         const template = await getTemplate();
-
         await serverRender(ctx, next, serverBundle, template);
 	});
 };

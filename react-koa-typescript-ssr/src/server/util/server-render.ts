@@ -33,6 +33,7 @@ export default async(ctx: any, next: any, bundle: any, template: any) => {
     });
     const generateClassName = createGenerateClassName();
     const createApp = bundle.default;
+    // console.log(bundle);
     const appTemplate = createApp(
         stores,
         routerContext,
@@ -41,6 +42,11 @@ export default async(ctx: any, next: any, bundle: any, template: any) => {
         generateClassName,
         theme,
     );
+
+    for (const [key, value] of Object.entries(appTemplate)) {
+        console.log(key, '-------', value);
+        console.log(JSON.stringify(value));
+    }
 
     await bootstrapper(appTemplate)
         .then(() => {

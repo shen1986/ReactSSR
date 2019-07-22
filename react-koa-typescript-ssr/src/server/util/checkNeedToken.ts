@@ -1,4 +1,4 @@
-export default async(ctx, next) => {
+export default async(ctx: any, next: any) => {
     const { needAccessToken } = ctx.query;
     const user = ctx.session.user || {};
 
