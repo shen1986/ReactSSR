@@ -35,7 +35,6 @@ if (!isDev) {
     });
 } else {
     const devStatic = require('./util/dev-static');
-    console.log(1111111);
     devStatic(app);
 }
 
