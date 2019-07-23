@@ -1,55 +1,95 @@
+'use strict'
+
+const portfinder = require('portfinder');
+const merge = require('webpack-merge');
 const path = require('path');
-const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('../config');
+const baseWebpackConfig = require('./webpack.base');
+const utils = require('./utils');
 
-const isDev = process.env.NODE_ENV === 'development';
+const HOST = process.env.HOST;
+const PORT = process.env.PORT && Number(process.env.PORT);
 
-const config = webpackMerge(baseConfig, {
-    entry: {
-        app: path.join(__dirname, '../client/app.js')
+const devWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
+  output: {
+    path: config.build.assetsRoot,
+    filename: utils.assetsPath('js/[name].[hash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
+    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
+  },
+  module: {
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+  },
+  devtool: config.dev.devtool,
+  devServer: {
+    clientLogLevel: 'warning',
+    historyApiFallback: {
+      rewrites: [
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'app.html') }
+      ]
     },
-    output: {
-        filename: '[name].[hash].js'
-    },
-    plugins: [
-        new HTMLPlugin({
-            template: path.join(__dirname, '../client/template.html')
-        }),
-        new HTMLPlugin({
-            template: '!!ejs-compiled-loader!' + path.join(__dirname, '../client/server.template.ejs'),
-            filename: 'server.ejs'
-        })
-    ]
+    hot: true,
+    contentBase: false,
+    compress: true,
+    host: HOST || config.dev.host,
+    port: PORT || config.dev.port,
+    open: config.dev.autoOpenBrowser,
+    overlay: config.dev.errorOverlay
+      ? { warnings: false, errors: true }
+      : false,
+    publicPath: config.dev.assetsPublicPath,
+    proxy: config.dev.proxyTable,
+    quiet: true, // necessary for FriendlyErrorsPlugin
+    watchOptions: {
+      poll: config.dev.poll
+    }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'app.html', // 改名是为了koa中间件服务
+      templateParameters: {
+        production: false
+      },
+      template: path.join(__dirname, '../client/index.html'),
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'server.ejs',
+      // template: '!!ejs-compiled-loader!' + path.join(__dirname, '../client/server.template.ejs'),
+      template: path.join(__dirname, '../client/server.template.ejs')
+    })
+  ]
 });
 
-if (isDev) {
-    config.entry = {
-        app: [
-            'react-hot-loader/patch',
-            path.join(__dirname, '../client/app.js')
-        ]
-    };
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = process.env.PORT || config.dev.port;
+  portfinder.getPort((err, port) => {
+    if (err) {
+      reject(err);
+    } else {
+      // publish the new Port, necessary for e2e tests
+      process.env.PORT = port;
+      // add port to devServer config
+      devWebpackConfig.devServer.port = port;
 
-    config.devServer = {
-        host: '0.0.0.0',
-        port: 8888,
-        contentBase: path.join(__dirname, '../dist'),
-        hot: true,
-        overlay: {
-            errors: true
+      // Add FriendlyErrorsPlugin
+      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
         },
-        publicPath: '/public',
-        historyApiFallback: {
-            index: '/public/index.html'
-        },
-        proxy: {
-            '/api': 'http://localhost:3333'
-        }
-    };
+        onErrors: config.dev.notifyOnErrors
+          ? utils.createNotifierCallback()
+          : undefined
+      }));
 
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-
-module.exports = config;
+      resolve(devWebpackConfig);
+    }
+  });
+});

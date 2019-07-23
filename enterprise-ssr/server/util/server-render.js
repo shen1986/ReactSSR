@@ -18,10 +18,9 @@ module.exports = (bundle, template, req, res) => {
         const routerContext = {};
         const stores = createStoreMap();
         const app = creatApp(stores, routerContext, req.url);
-
         // 在这里调查了好久，store一直不能传递到jsx里面，
         // 通过asyncBootstrap的第三个参数，把stores放到上下文里面才能在Client端取到
-        asyncBootstrap(app, undefined, stores).then(() => {
+        asyncBootstrap(app).then(() => {
             if (routerContext.url) {
               res.status(302).setHeader('Location', routerContext.url)
               res.end()

@@ -1,34 +1,61 @@
+'use strict'
 const path = require('path');
+const config = require('../config/index');
+const utils = require('./utils');
+const resolve = (dir) => path.join(__dirname, '../client/', dir);
+
+const createLintingRule = () => ({
+  test: /\.(js|jsx)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+});
 
 module.exports = {
-    output: {
-        path: path.join(__dirname, '../dist'),
-        publicPath: '/public/'
-    },
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    module: {
-        rules: [
-            {
-                enforce: 'pre',
-                test: /\.(jsx|js)$/,
-                loader: 'eslint-loader',
-                exclude: [
-                    path.resolve(__dirname, '../node_modules')
-                ]
-            },
-            {
-                test: /\.jsx$/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: [
-                    path.join(__dirname, '../node_modules')
-                ]
-            }
-        ]
-    }
+  // context: path.resolve(__dirname, '../client'),
+  entry: {
+    app: path.join(__dirname, '../client/app.js')
+  },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx', '.less']
+  },
+  module: {
+    rules: [
+      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader'
+        // include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
+      },
+      { test: /\.ejs$/, loader: 'ejs-compiled-loader' }
+    ]
+  }
 }

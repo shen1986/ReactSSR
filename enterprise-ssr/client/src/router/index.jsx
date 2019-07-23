@@ -4,9 +4,9 @@ import {
     Redirect,
 } from 'react-router-dom';
 
-import TopicList from '../views/TopicList';
-import TopicDetail from '../views/TopicDetail';
-import TestApi from '../views/test/api-test';
+import TopicList from '../containers/TopicList';
+import TopicDetail from '../containers/TopicDetail';
+import TestApi from '../containers/test/api-test';
 
 export default () => [
     <Route path="/" render={() => <Redirect to="/list" />} exact key="first" />,

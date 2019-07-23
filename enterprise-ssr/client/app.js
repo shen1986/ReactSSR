@@ -1,47 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import { AppContainer } from 'react-hot-loader'; // eslint-disable-line
-
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { lightBlue, pink } from '@material-ui/core/colors';
-
-import App from './views/App';
-import AppState from './store/app-state';
-
-const theme = createMuiTheme({
-    palette: {
-        primary: pink,
-        secondary: lightBlue,
-        type: 'light',
-    },
-});
+import { deepPurple } from '@material-ui/core/colors';
+import HotApp from './src/containers/HotApp';
+import { AppState } from './src/store';
 
 const initialState = window.__INITIAL_STATE__ || {}; // eslint-disable-line
 
-const root = document.getElementById('root');
-const render = (Component) => {
-    const renderMethod = ReactDOM.hydrate;
-    renderMethod(
-        <AppContainer>
-            <Provider appState={new AppState(initialState.appState)}>
-                <BrowserRouter>
-                    <MuiThemeProvider theme={theme}>
-                        <Component />
-                    </MuiThemeProvider>
-                </BrowserRouter>
-            </Provider>
-        </AppContainer>,
-        root,
-    );
-};
+const appState = new AppState(initialState.appState);
+// const topicStore = new TopicStore(initialState.topicStore);
+// const userStore = new UserStore(initialState.userStore);
+// import App from './src/containers/App';
 
-render(App);
+const renderMethod = !module.hot ? ReactDOM.hydrate : ReactDOM.render;
 
-if (module.hot) {
-    module.hot.accept('./views/App', () => {
-        const NextApp = require('./views/App').default; // eslint-disable-line
-        render(NextApp);
-    });
-}
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ef5350',
+    },
+    secondary: {
+      main: deepPurple[400],
+    },
+    type: 'light',
+  },
+});
+
+renderMethod(
+  <Provider
+    appState={appState}
+    // topicStore={topicStore}
+    // userStore={userStore}
+  >
+    <Router>
+      <MuiThemeProvider theme={theme}>
+        <HotApp />
+      </MuiThemeProvider>
+    </Router>
+  </Provider>,
+  document.getElementById('root'),
+);

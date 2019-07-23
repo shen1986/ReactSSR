@@ -1,24 +1,32 @@
+'use strict'
+
+const merge = require('webpack-merge');
 const path = require('path');
-const webpackMerge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
+const config = require('../config');
+const baseWebpackConfig = require('./webpack.base');
+const utils = require('./utils');
 
-const isDev = process.env.NODE_ENV === 'development';
+const serverWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
+  target: 'node',
+  entry: {
+    app: path.join(__dirname, '../client/server-entry.js')
+  },
+  output: {
+    path: config.build.assetsRoot,
+    // filename: utils.assetsPath('js/server-entry.js'),
+    filename: 'server-entry.js',
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
+    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    libraryTarget: 'commonjs2'
+  },
+  // 去除依赖，不打包到生成的文件中
+  // 打包出来的代码是运行在node环境中的，这些类库是可以通过require()方式调用的
+  externals: Object.keys(require('../package.json').dependencies),
+  // module: {
+  //   rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+  // },
+  devtool: config.dev.devtool
+});
 
-const config = {
-    target: 'node',
-    entry: {
-        app: path.join(__dirname, '../client/server-entry.js')
-    },
-    output: {
-        filename: 'server-entry.js',
-        libraryTarget: 'commonjs2'
-    }
-};
-
-if (!isDev) {
-    // 为了不将 node_modules 目录下的第三方模块打包进输出文件中 nodejs环境最自动去查找这些第三方的包，所以不需要打包
-    config.externals = Object.keys(require('../package.json').dependencies);
-    config.mode = 'production';
-}
-
-module.exports = webpackMerge(baseConfig, config);
+module.exports = serverWebpackConfig;
