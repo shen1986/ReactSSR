@@ -1,4 +1,0 @@
-## 坑
-直接用ts-node运行ts服务，解析出来的bundle结构，和直接用js解析出来的bundle结构，不一样。
-尤其是React组件，中间多了很多第三方的方法。在调用bootstrapper的时候，导致无法遍历React树。
-typeScript要做到能够和js一样的解析，只能先通过webpack把TypeScript动态在内存中解析成javaScript，然后再运行javaScript的服务比较稳妥。但是这个后端编程要花费大量时间去学习和研究。还是先用javaScript来写服务端看看。

@@ -1,4 +1,0 @@
-# 自定义忽略
-node_modules
-dist
-node_modules/**/node_modules
