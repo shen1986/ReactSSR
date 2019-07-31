@@ -34,9 +34,8 @@ app.prepare()
         router.use('/api/user', loginRouter.routes());
         router.use('/api/v1', proxy.routes());
 
-        router.get('/a', async (ctx) => {
-            await app.render(ctx.req, ctx.res, '/b', ctx.query);
-            ctx.respond = false;
+        router.get('/', async (ctx) => {
+            ctx.redirect('/list');
         });
 
         router.get('/b', async (ctx) => {

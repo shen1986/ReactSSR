@@ -1,32 +1,25 @@
-import { observable, computed, action, autorun } from 'mobx';
+import {
+    observable,
+    computed,
+    action,
+  } from 'mobx';
 
-class AppState {
-    constructor({ count, name }: any = { count: 0, name: 'shenxf' }) {
-        this.count = count;
-        this.name = name;
+  class AppState {
+    constructor ({ count, name } = { count: 0, name: 'Graceji' }) {
+      this.count = count;
+      this.name = name;
     }
 
-    @observable private count: number;
+    @observable count;
 
-    @observable private name: string;
+    @observable name;
 
-    @computed
-    get msg() {
-        return `${this.name} say count is ${this.count}`;
+    @computed get msg () {
+      return `${this.name} say count is ${this.count}`;
     }
 
-    @action
-    public add(num?: number) {
-        if (num) {
-            this.count += num;
-        } else {
-            this.count += 1;
-        }
-    }
-
-    @action
-    public changeName(name: string): void {
-        this.name = name;
+    @action add () {
+      this.count += 1;
     }
 }
 
