@@ -5,7 +5,6 @@ import testHoc from '../lib/with-mobx';
 import Layout from '../components/Layout';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
-import '../styles/style.less'; // 全局式样
 
 const theme = createMuiTheme({
     palette: {
