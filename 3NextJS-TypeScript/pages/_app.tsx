@@ -3,20 +3,8 @@ import App, { Container } from 'next/app';
 import { Provider } from 'mobx-react';
 import testHoc from '../lib/with-mobx';
 import Layout from '../components/Layout';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { deepPurple } from '@material-ui/core/colors';
-
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#ef5350',
-        },
-        secondary: {
-            main: deepPurple[400],
-        },
-        type: 'light',
-    },
-});
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from '../lib/theme';
 
 class MyApp extends App {
     static async getInitialProps(ctx) {
