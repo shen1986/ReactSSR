@@ -28,7 +28,7 @@ router.post('/login', async (ctx, next) => {
             ctx.data = err.response.data;
         } else {
             // 交给全局错误处理器处理，以后再加！！！
-            console.log(err);
+            await next(err);
         }
     }
 });
