@@ -90,6 +90,15 @@ module.exports = withBundleAnalyzer(
                 enforce: 'pre',
             });
 
+            config.module.rules.unshift({
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'img/[name].[hash:7].[ext]'
+                }
+            });
+
             return config;
         },
         // publicRuntimeConfig: {

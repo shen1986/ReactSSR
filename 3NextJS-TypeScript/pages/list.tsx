@@ -40,19 +40,6 @@ class TopicList extends Component<IProps, IStates> {
     this.props.topicStore.fetchTopics('all');
   }
 
-  bootstrap () {
-    // 做数据的初始化
-    // 可以异步的操作数据
-    // 服务端渲染时，执行bootstrapper()方法(server-render.js中))时，就会来执行组件中此方法，
-    // 组件中此方法执行结束后，才会继续渲染工作
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.props.appState.count = 4;
-      },         1000);
-      resolve(true);
-    });
-  }
-
   handleTabChange (e, value) {
     const { history } = this.props;
     this.setState({
