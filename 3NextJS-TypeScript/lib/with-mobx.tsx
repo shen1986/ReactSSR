@@ -1,7 +1,9 @@
 import React from 'react';
 import { createStoreMap } from '../store';
+import { useStaticRendering } from 'mobx-react';
 
 const isServer = typeof window === 'undefined';
+useStaticRendering(isServer);
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState? : any) {
