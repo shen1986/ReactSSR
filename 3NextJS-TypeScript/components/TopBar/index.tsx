@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import topBarStyles from './style';
 
 interface Props {
-    history: any;
     classes: any;
+    router: any;
 }
 
 // @ts-ignore
@@ -25,7 +25,7 @@ class TopBar extends Component<Props> {
 
   handleLogin () {
     // 登录跳转
-    this.props.history.replace('/login');
+    this.props.router.replace('/login');
   }
 
   render () {
@@ -35,7 +35,7 @@ class TopBar extends Component<Props> {
         <AppBar position="fixed">
           <Toolbar>
             <IconButton>
-              <HomeIcon />
+              <HomeIcon className={classes.homeIcon}/>
             </IconButton>
             <Typography variant="h5" className={classes.flex}>
               Cnode

@@ -15,7 +15,7 @@ import userStyles from './styles/user-style';
 
 @inject((stores: any) => {
     return {
-        user: stores.userStore.user,
+        user: stores.appState.user,
     };
 }) @observer
 class User extends React.Component<any> {

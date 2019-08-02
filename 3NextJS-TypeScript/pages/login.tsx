@@ -30,9 +30,9 @@ class UserLogin extends React.Component<any, any> {
     }
 
     getFrom(location?: any) {
-        console.log(this.props.router);
+        // console.log(this.props.router);
         const myLocation = location || this.props.router.pathname;
-        console.log(this.props.router.pathname);
+        // console.log(this.props.router.pathname);
         const query = queryString.parse(myLocation.search);
         return query.from || '/user/info';
     }
@@ -99,12 +99,11 @@ class UserLogin extends React.Component<any, any> {
     classes: PropTypes.object.isRequired,
     appState: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
 };
 
 export default withRouter(withStyles(loginStyles as any)(inject((stores: any) => {
     return {
         appState: stores.appState,
-        user: stores.userStore.user,
+        user: stores.appState.user,
     };
 })(observer(UserLogin))) as any);

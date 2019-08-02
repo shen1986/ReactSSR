@@ -14,6 +14,7 @@ router.post('/login', async (ctx, next) => {
                 accesstoken: accessToken,
             }),
         });
+        console.log('accessTokenresult', result);
         if (result.status === 200 && result.data.success) {
             ctx.session.user = {
                 accessToken,
@@ -24,6 +25,7 @@ router.post('/login', async (ctx, next) => {
             ctx.data = result.data;
         }
     } catch (err) {
+        console.log('err', err);
         if (err.response) {
             ctx.data = err.response.data;
         } else {

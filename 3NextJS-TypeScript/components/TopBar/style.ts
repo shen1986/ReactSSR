@@ -7,6 +7,9 @@ const styles = {
   button: {
     color: '#fff',
   },
+  homeIcon: {
+      color: '#fff',
+  },
 };
 
 export default styles;

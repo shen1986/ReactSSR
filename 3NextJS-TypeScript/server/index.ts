@@ -5,6 +5,7 @@ import session from 'koa-session';
 import loginRouter from './routers/handle-login';
 import proxy from './routers/proxy';
 import handleResponse from './middlewares/handle-response';
+import  bodyParser from 'koa-bodyparser';
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -29,6 +30,7 @@ app.prepare()
         };
 
         server.use(handleResponse);
+        server.use(bodyParser());
         server.use(session(config, server));
 
         router.use('/api/user', loginRouter.routes());
