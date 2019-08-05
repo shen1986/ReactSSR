@@ -1,58 +1,35 @@
 import axios from 'axios';
 
-// console.log(process.env.NODE_ENV); // development
-const baseUrl = 'http://localhost:3000/api/v1'; // 开发环境
+const baseUrl = process.env.API_BASE || '';
 
-export const get = (url, params) => (
-  new Promise((resolve, reject) => {
-    axios.get(`${baseUrl}${url}`, {
-      params: {
-        ...params,
-      },
-    })
-      .then((res) => {
-        console.log(params);
-        if (res.data && res.data.success) {
-          resolve(res.data);
-        } else {
-          reject(res.data);
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          reject(error.response.data);
-        } else {
-          reject({
-            success: false,
-            err_msg: error.message,
-          });
-        }
-      });
-  })
-);
+const queryString = (url, json) => {
+    const str = Object.keys(json).reduce((result, key) => {
+        let newResult: String = result;
+        newResult += `${key}=${json[key]}&`;
+        return newResult;
+    },                                   '');
+    return `${url}?${str.substr(0, str.length - 1)}`;
+};
 
-export const post = (url, params, data) => (
-  new Promise((resolve, reject) => {
-    axios.post(`${baseUrl}${url}`, {
-      params,
-      data,
-    })
-      .then((res) => {
-        if (res.data && res.data.success) {
-          resolve(res.data);
-        } else {
-          reject(res.data);
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          reject(error.response.data);
-        } else {
-          reject({
-            success: false,
-            err_msg: error.message,
-          });
-        }
-      });
-  })
-);
+export const get = (url, params) => {
+    return new Promise((resolve, reject) => {
+        axios.get(queryString(`${baseUrl}/api${url}`, params))
+            .then((resp) => {
+                resolve(resp.data);
+            }).catch(reject);
+    });
+};
+
+export const post = (url, data) => {
+    return new Promise((resolve, reject) => {
+        axios.post(`${baseUrl}/api${url}`, data)
+            .then((resp) => {
+                resolve(resp.data);
+            })
+            .catch(reject);
+    });
+};
+
+export default {
+    get,
+};

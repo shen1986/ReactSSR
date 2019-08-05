@@ -1,5 +1,5 @@
 import AppState from './app-state';
-import Topic from './topic';
+import Topic from './topic-store';
 
 export const createStoreMap = (initialState?: any) => ({
     appState: new AppState().init(initialState ? initialState.appState : undefined),

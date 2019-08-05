@@ -10,11 +10,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ContentWrap from '../components/Common/ContentWrap';
 import TopicListItem from '../components/TopicList/ListItem';
 import { tabs } from '../lib/variable-define';
+import { withRouter } from 'next/router';
 
 interface IProps {
     topicStore: any;
     appState: any;
-    history: any;
+    router: any;
 }
 
 interface IStates {
@@ -41,12 +42,12 @@ class TopicList extends Component<IProps, IStates> {
   }
 
   handleTabChange (e, value) {
-    const { history } = this.props;
+    const { router } = this.props;
     this.setState({
       tabValue: value,
     });
 
-    history.push({
+    router.push({
       pathname: '/list',
       search: `?tab=${value}`,
     });
@@ -55,7 +56,10 @@ class TopicList extends Component<IProps, IStates> {
 
   // 列表项点击事件
   listItemClick (id) {
-    this.props.history.push(`/detail/${id}`);
+      this.props.router.push({
+          pathname: '/detail',
+          query: { id },
+      });
   }
 
   render () {
@@ -106,4 +110,4 @@ class TopicList extends Component<IProps, IStates> {
   history: PropTypes.object,
 };
 
-export default TopicList;
+export default withRouter(TopicList);
