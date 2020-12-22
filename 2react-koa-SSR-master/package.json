@@ -102,7 +102,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.2",
-    "node-notifier": "^5.2.1",
+    "node-notifier": "^8.0.1",
     "nodemon": "^1.18.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "ora": "^3.0.0",
